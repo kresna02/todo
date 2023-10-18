@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {% if task[2] %}
+                    <s>{{ task[1]}}</s>
+                {% else %}
+                    {{ task[1] }}
+                {% endif %}
+                <a href="{{ url_for('toggle_task', task_id=task[0]) }}">Toggle</a>
+                <a href="{{ url_for('delete_task', task_id=task[0]) }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <form method="POST" action="/add">
+        <input type="text" name="task" required>
+        <button type="submit">Add Task</button>
+    </form>
+</body>
+</html>
